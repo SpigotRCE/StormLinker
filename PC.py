@@ -3,6 +3,7 @@
 import socket
 import threading
 
+
 def handle_client(client_socket, client_name, target_ip, protocol, seconds, cps):
     while True:
         if send_data:
@@ -38,12 +39,12 @@ def create_and_handle_server(target_ip, protocol, seconds, cps):
 
 print("Enter target ip:port : ")
 target_ip = input()
-print("Enter IP range(per client): ")
-protocol = input()
 print("Enter protocol: ")
-seconds = input()
+protocol = input()
 print("Enter seconds: ")
-cps = input("Enter CPS: ")
+seconds = input()
+print("Enter cps: ")
+cps = input()
 print("Enter number of clients: ")
 nodes = int(input("Enter no. of VPS: "))
 server_port = 35565
