@@ -4,15 +4,27 @@
 
 import socket
 import subprocess
+from json import loads, dumps
 
 import proxy_scraper
 
-client_name = input("Enter client name: ")
-server_host = '84.54.51.45'
-server_port = 35565
 
 
-def connect_to_server(server_host, server_port):
+try:
+    with open("config.json", "r") as f:
+        config = loads(f.read())
+    client_name = config["client_name"]
+    server_host = config["server_host"]
+    server_port = config["server_port"]
+
+except:
+    client_name = input("Enter client name : ")
+    server_host, server_port = input("Enter server ip:port :").split(":")
+    with open("config.json", "w") as f:
+        f.write(dumps({"client_name": client_name, "server_host": server_host, "server_port": server_port}))
+
+
+def connect_to_server():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = client_socket.connect_ex((server_host, server_port))
 
@@ -29,9 +41,11 @@ def connect_to_server(server_host, server_port):
 
 
 def main():
+    print("Scraping proxies")
     proxy_scraper.main()
+    print("Finished scraping")
     while True:
-        connect_to_server(server_host, server_port)
+        connect_to_server()
 
 
 main()
