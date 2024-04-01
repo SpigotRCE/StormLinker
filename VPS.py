@@ -26,7 +26,7 @@ except:
 
 def connect_to_server():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = client_socket.connect_ex((server_host, server_port))
+    result = client_socket.connect_ex((server_host, int(server_port)))
 
     if result:
         return
