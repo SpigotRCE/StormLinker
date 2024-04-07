@@ -21,8 +21,7 @@ https://raw.githubusercontent.com/UptimerBot/proxy-list/main/proxies/socks4.txt
 '''
 
 
-file = open('proxies.txt', 'w')
-file = open('proxies.txt', 'a')
+file = open('proxies.txt', 'x')
 good_proxies = list()
 
 

@@ -11,7 +11,7 @@ import proxy_scraper
 
 
 try:
-    with open("config.json", "r") as f:
+    with open("config.json", "x") as f:
         config = loads(f.read())
     client_name = config["client_name"]
     server_host = config["server_host"]
