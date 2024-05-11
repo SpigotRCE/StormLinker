@@ -16,9 +16,10 @@ def handle_client(client_socket, client_name, target_ip, protocol, method, secon
             client_socket.close()
             print(f"{client_name} has disconnected")
             break
+        print(f"{client_name} sent {recv}")
 
 
-def create_and_handle_server(target_ip, protocol, seconds, cps):
+def create_and_handle_server(target_ip, protocol, method, seconds, cps):
     global send_data
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(("0.0.0.0", server_port))
@@ -32,7 +33,7 @@ def create_and_handle_server(target_ip, protocol, seconds, cps):
         print(f"Connection from {client_address}/{client_name}")
 
         client_thread = threading.Thread(target=handle_client,
-                                         args=(client_socket, client_name, target_ip, protocol, seconds, cps))
+                                         args=(client_socket, client_name, target_ip, protocol, method, seconds, cps))
         client_thread.start()
     send_data = True
 
@@ -49,6 +50,7 @@ print("Enter cps: ")
 cps = input()
 print("Enter number of clients: ")
 nodes = int(input(""))
-server_port = 35565
+print("Enter port (must be open and not taken) : ")
+server_port = int(input(""))
 send_data = False
 create_and_handle_server(target_ip, protocol, method, seconds, cps)

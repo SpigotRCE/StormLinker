@@ -47,5 +47,4 @@ def main():
     while True:
         connect_to_server()
 
-
 main()

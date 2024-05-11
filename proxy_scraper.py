@@ -1,7 +1,7 @@
 import re
 import requests
 import threading
-
+import os
 
 
 urls = '''
@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/sock
 https://raw.githubusercontent.com/UptimerBot/proxy-list/main/proxies/socks4.txt
 '''
 
-
+os.remove('./proxies.txt')
 file = open('proxies.txt', 'x')
 good_proxies = list()
 
