@@ -20,6 +20,9 @@ apt install -y default-jre
 sudo apt install -y git
 apt install -y git
 
+sudo rm StormLinker -r
+rm StormLinker -r
+
 # Clone the repository
 sudo git clone https://github.com/SpigotRCE/StormLinker
 git clone https://github.com/SpigotRCE/StormLinker
