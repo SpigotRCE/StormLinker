@@ -1,23 +1,25 @@
 # client
-
+import random
 # this is the code before the impl of qchecker
 
 import socket
 import subprocess
+import time
 from json import loads, dumps
 
 import proxy_scraper
 
-
-
 try:
-    with open("config.json", "x") as f:
+    with open("config.json", "r+") as f:
         config = loads(f.read())
     client_name = config["client_name"]
     server_host = config["server_host"]
     server_port = config["server_port"]
+    print(f"Client Name: {client_name}")
+    print(f"Server IP:Port : {server_host}:{server_port}")
 
-except:
+except Exception as e:
+    print(e)
     client_name = input("Enter client name : ")
     server_host, server_port = input("Enter server ip:port :").split(":")
     with open("config.json", "w") as f:
@@ -43,8 +45,16 @@ def connect_to_server():
 def main():
     print("Scraping proxies")
     proxy_scraper.main()
-    print("Finished scraping")
+    print("Finished scraping, now shuffling")
+    with open('./proxies.txt', 'r+') as file:
+        proxies = file.read().splitlines()
+        random.shuffle(proxies)
+        for ip in proxies:
+            file.write(f"{ip}\n")
+    print("Finished shuffling")
+
     while True:
         connect_to_server()
+
 
 main()

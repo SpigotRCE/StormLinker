@@ -30,7 +30,7 @@ def create_and_handle_server(target_ip, protocol, method, seconds, cps):
     for i in range(nodes):
         client_socket, client_address = server_socket.accept()
         client_name = client_socket.recv(1024).decode('utf-8')
-        print(f"Connection from {client_address}/{client_name}")
+        print(f"Connection from {client_address[0]}:{client_address[1]}/{client_name}")
 
         client_thread = threading.Thread(target=handle_client,
                                          args=(client_socket, client_name, target_ip, protocol, method, seconds, cps))
